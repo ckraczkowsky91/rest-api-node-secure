@@ -1,0 +1,15 @@
+import { addItem, getItems } from './itemControllers';
+
+const path = require('path');
+
+const routes = (app) => {
+  app.route('/')
+    .get((req, res) => {
+      res.sendFile(path.join(__dirname + '/index.html'));
+    });
+  app.route('/items')
+    .post(addItem)
+    .get(getItems);
+};
+
+export default routes;
