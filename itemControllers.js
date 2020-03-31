@@ -1,11 +1,10 @@
-import mongoose from 'mongoose';
-import { itemSchema } from './itemModel';
+const mongoose = require('mongoose');
+const itemSchema = require('./itemModel');
 
 const Item = mongoose.model('Item', itemSchema);
 
-export const addItem = (req, res) => {
+const addItem = (req, res) => {
   let newItem = new Item(req.body);
-
   newItem.save((err, Item) => {
     if (err) {
       res.send(err);
@@ -15,7 +14,7 @@ export const addItem = (req, res) => {
   });
 };
 
-export const getItems = (req, res) => {
+const getItems = (req, res) => {
   Item.find({}, (err, Item) => {
     if (err) {
       res.send(err);
@@ -24,3 +23,6 @@ export const getItems = (req, res) => {
     };
   });
 };
+
+module.exports.addItem = addItem;
+module.exports.getItems = getItems;

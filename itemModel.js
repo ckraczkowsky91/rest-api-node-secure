@@ -1,10 +1,16 @@
-import mongoose from "mongoose";
+const mongoose = require('mongoose');
 
-const schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
-export const itemSchema = new schema({
+const itemSchema = new Schema({
   name: {
     type: String,
     required: true
+  },
+  dateAdded: {
+    type: Date,
+    default: Date.now
   }
 });
+
+module.exports = itemSchema;

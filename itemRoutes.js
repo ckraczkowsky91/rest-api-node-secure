@@ -1,4 +1,7 @@
-import { addItem, getItems } from './itemControllers';
+const controllers = require('./itemControllers');
+
+const addItem = controllers.addItem;
+const getItems = controllers.getItems;
 
 const path = require('path');
 
@@ -12,4 +15,4 @@ const routes = (app) => {
     .get(getItems);
 };
 
-export default routes;
+module.exports = routes;

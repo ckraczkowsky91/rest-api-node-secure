@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
-import express from 'express';
-import routes from './itemRoutes';
+const mongoose = require('mongoose');
+const express = require('express');
+const routes = require ('./itemRoutes');
 
 // const http = require("http");
 const app = express();
