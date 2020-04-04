@@ -1,8 +1,10 @@
+/*
+Basic web server code
+*/
 const mongoose = require('mongoose');
 const express = require('express');
-const routes = require ('./itemRoutes');
+const routes = require ('./routes');
 
-// const http = require("http");
 const app = express();
 app.use(express.json());
 
@@ -14,13 +16,12 @@ mongoose.connect('mongodb://127.0.0.1:27017/itemDB', {
   "useUnifiedTopology": true
 });
 
-// const server = http.createServer((req, res) => {
-//   res.writeHead(200, {'Content-Type': 'text/html'});
-//   res.end('<h1>Hello World!</h1><h2>Item List</h2><ul><li style="color: red">Item 1</li></ul><h2>Add Item</h2><form><label for="item">Item: </label><input type="text"></br><input type="submit" value="Submit"></form>');
-// });
-
 routes(app);
 
 app.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
 });
+
+/*
+Added security code
+*/
