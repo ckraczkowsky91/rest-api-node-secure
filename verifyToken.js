@@ -7,12 +7,13 @@ const path = require('path');
 const verifyToken = (req, res, next) => {
   var token = req.headers['x-access-token'];
   if (!token) {
-    res.status(403).send('No token was provided.');
+    res.status(403).sendFile(path.join(__dirname + '/unverified.html'));
+    console.log('No token was provided.');
   } else {
     jwt.verify(token, config.secretKey, (error, decoded) => { // jwt.verify(token, secretOrPublicKey, [options, callback])
       if (error) {
         res.status(500).sendFile(path.join(__dirname + '/unverified.html'));
-        // res.status(500).send('Failure to verify the token.');
+        console.log('Failure to verify the token.');
       } else {
         req.userId = decoded.id;
         next();
