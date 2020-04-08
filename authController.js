@@ -25,6 +25,7 @@ const registerUser = (req, res) => {
     if (error) {
       res.status(500).send(error);
     } else {
+      console.log(jwt.decode(token, {complete: true}));
       res.status(200).send({auth: true, token: token});
     };
   });
@@ -32,7 +33,7 @@ const registerUser = (req, res) => {
 // Create the function that will be called by a GET call to the /register endpoint
 const getRegisteredUser = (req, res) => {
 // Get token from the headers in the request
-  var token = req.headers['x-access-token'];
+ var token = req.headers['x-json-web-token'];
 // Hand jsonwebtoken
   if (!token) {
     res.status(401).send({auth: false, message: 'Token not provided.'});
