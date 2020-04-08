@@ -12,9 +12,13 @@ const path = require('path');
 
 const routes = (app) => {
   app.route('/')
-    .get(verifyToken, (req, res) => {
+    .get((req, res) => {
       res.sendFile(path.join(__dirname + '/index.html'));
     });
+  app.route('/verified')
+    .get(verifyToken, (req, res) => {
+      res.sendFile(path.join(__dirname + '/verified.html'))
+    })
   app.route('/auth/register')
     .post(registerUser)
     .get(getRegisteredUser);
