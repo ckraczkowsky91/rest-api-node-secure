@@ -33,24 +33,18 @@ const registerUser = (req, res) => {
 // Create the function that will be called by a GET call to the /register endpoint
 const getRegisteredUser = (req, res) => {
 // Get token from the headers in the request
- var token = req.headers['x-json-web-token'];
-// Hand jsonwebtoken
-  if (!token) {
+  var token = req.token;
+  var decoded = req.decoded;
+  if(!token){
     res.status(401).send({auth: false, message: 'Token not provided.'});
   } else {
-    jwt.verify(token, config.secretKey, (error, decoded) => { // jwt.verify(token, secretOrPublicKey, [options, callback])
+    User.findById(decoded.id, {password: 0}, (error, User) => { // Model.findById(id, projection, [options, callback])
       if (error) {
-        res.status(500).send({auth: false, message: 'Token can not be verified.'});
+        res.status(500).send('There was an error finding that user.');
+      } else if (!User) {
+        res.status(404).send('Could not locate that user.');
       } else {
-        User.findById(decoded.id, {password: 0}, (error, User) => { // Model.findById(id, projection, [options, callback])
-          if (error) {
-            res.status(500).send('There was an error finding that user.');
-          } else if (!User) {
-            res.status(404).send('Could not locate that user.');
-          } else {
-            res.status(200).send(User);
-          };
-        });
+        res.status(200).send(User);
       };
     });
   };
