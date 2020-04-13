@@ -15,13 +15,13 @@ const routes = (app) => {
     .get((req, res) => {
       res.sendFile(path.join(__dirname + '/index.html'));
     });
-  app.route('/verified')
+  app.route('/content')
     .get(verifyToken, (req, res) => {
       res.sendFile(path.join(__dirname + '/verified.html'))
-    })
+    });
   app.route('/auth/register')
     .post(registerUser)
-    .get(getRegisteredUser);
+    .get(verifyToken, getRegisteredUser);
   app.route('/auth/login')
     .post(loginUser);
   app.route('/items')
