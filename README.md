@@ -1,2 +1,2 @@
-# rest-api-node-express
-Building a RESTful API with Node.js and the Express.js web app framework
+# rest-api-node-react
+Build a secure frontend application with React.js, React Router, and axios.
